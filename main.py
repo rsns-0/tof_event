@@ -1,6 +1,3 @@
-import pyautogui as pa
-from pathlib import Path
-import json
 from scripts.click_scripts import locate, locate_long, sleep_click as click
 from time import sleep
 

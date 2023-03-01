@@ -9,7 +9,7 @@ from dataclasses import dataclass
 
 @dataclass
 class UiDataCoordinatesOnly:
-    name: str | None = None
+    name: str
     coordinates: list[str] | None = None
 
     def __post_init__(self):
@@ -17,8 +17,7 @@ class UiDataCoordinatesOnly:
             raise Exception(
                 "Standalone coordinates data must have a set of coordinates."
             )
-        if not self.name:
-            raise Exception("Data must have a name.")
+        
 
 
 @dataclass
@@ -30,10 +29,8 @@ class UiDataImage(UiDataCoordinatesOnly):
         """
         Overrides parent post init to make coordinates optional. Add additional validation.
         Generates region from from pairs of coordinates provided.
-        Uses file name as name if a name is not provided.
         """
-        if not self.name:
-            raise Exception("Data needs name.")
+        
         for item in self.image_bounds:
             if len(item) < 2:
                 raise Exception(

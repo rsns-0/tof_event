@@ -6,6 +6,9 @@ import logging
 class NotFoundException(Exception):
     ...
 
+class TriesExhausted(Exception):
+    ...
+
 
 def retry(fn):
     def wrap(*args, tries=3, time_to_sleep=5, expect_value=True, **kwargs):
@@ -23,7 +26,7 @@ def retry(fn):
                 exc_info=True,
             )
             if tries <= 0:
-                raise Exception("Out of tries.")
+                raise TriesExhausted("Out of tries.")
             sleep(time_to_sleep)
             return wrap(
                 tries=tries - 1,

@@ -8,26 +8,31 @@ class NotFoundException(Exception):
 
 
 def retry(fn):
-    def wrap(*args, **kwargs):
-        tries = 3
-        time_to_sleep = 5
-        expect_value = False
-        while tries > 0:
-            try:
-                result = fn(*args, **kwargs)
-                if expect_value == True:
-                    if not result:
-                        raise NotFoundException(
-                            f"Function returned false value. Details: Fn:{fn.__name__}, Arg:{args}, Kwarg:{kwargs} "
-                        )
-                return result
-            except NotFoundException:
-                logging.warn(
-                    f"{fn.__name__} failed, trying again after {time_to_sleep} seconds. Tries remaining: {tries}",
-                    exc_info=True,
-                )
-                sleep(time_to_sleep)
-                tries -= 1
+    def wrap(*args, tries=3, time_to_sleep=5, expect_value=True, **kwargs):
+        try:
+            result = fn(*args, **kwargs)
+            if expect_value:
+                if not result:
+                    raise NotFoundException(
+                        f"Function returned false value. Details: Fn:{fn.__name__}, Arg:{args}, Kwarg:{kwargs} "
+                    )
+            return result
+        except NotFoundException:
+            logging.warn(
+                f"{fn.__name__} failed, trying again after {time_to_sleep} seconds. Tries remaining: {tries}",
+                exc_info=True,
+            )
+            if tries <= 0:
+                raise Exception("Out of tries.")
+            sleep(time_to_sleep)
+            return wrap(
+                tries=tries - 1,
+                time_to_sleep=time_to_sleep,
+                expect_value=expect_value,
+                *args,
+                **kwargs,
+            )
+
     return wrap
 
 

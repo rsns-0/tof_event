@@ -5,7 +5,7 @@ from pathlib import Path
 
 
 def test_retry():
-    with pytest.raises(TriesExhausted) as excinfo:
+    with pytest.raises(NotFoundException) as excinfo:
         path = Path(__file__).parent / "test_resources/quest_marker.png"
         qimg = str(path)
         top_left = (2243,223)

@@ -1,0 +1,61 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "array",
+    "items": [
+        {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "coordinates": {
+                    "type": "array",
+                    "items": [
+                        {
+                            "type": "integer"
+                        },
+                        {
+                            "type": "integer"
+                        }
+                    ]
+                },
+                "file_name:": {
+                    "type": "string"
+                },
+                "bounds:": {
+                    "type": "array",
+                    "items": [
+                        {
+                            "type": "array",
+                            "items": [
+                                {
+                                    "type": "integer"
+                                },
+                                {
+                                    "type": "integer"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "array",
+                            "items": [
+                                {
+                                    "type": "integer"
+                                },
+                                {
+                                    "type": "integer"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            },
+            "required": [
+                "name",
+                "coordinates",
+                "file_name:",
+                "bounds:"
+            ]
+        }
+    ]
+}

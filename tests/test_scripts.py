@@ -14,4 +14,3 @@ def test_retry():
         height = bot_right[1]-top_left[1]
         regionparam = (top_left[0], top_left[1], width, height)
         quest_marker_coords = locate(qimg, region=regionparam)
-        print(quest_marker_coords) if quest_marker_coords else print('not found')

@@ -1,0 +1,74 @@
+{
+    "flame_icon_area": {
+        "file_name": "flame_icon_area.png",
+        "region": [
+            10.0,
+            155.0,
+            320.0,
+            445.0
+        ],
+        "type": "image"
+    },
+    "frost_flame_event": {
+        "coordinates": [
+            1700.0,
+            230.0
+        ],
+        "type": "point"
+    },
+    "frost_flame_img": {
+        "file_name": "frost_flame_image.png",
+        "region": [
+            610.0,
+            730.0,
+            360.0,
+            70.0
+        ],
+        "type": "image"
+    },
+    "fruit_barr_event": {
+        "coordinates": [
+            1700.0,
+            540.0
+        ],
+        "type": "point"
+    },
+    "gift_icon": {
+        "coordinates": [
+            1615.0,
+            50.0
+        ],
+        "type": "point"
+    },
+    "gift_sword_area": {
+        "file_name": "gift_sword_area.png",
+        "region": [
+            1550.0,
+            1.0,
+            180.0,
+            89.0
+        ],
+        "type": "image"
+    },
+    "half_ani_button": {
+        "coordinates": [
+            980.0,
+            1020.0
+        ],
+        "type": "point"
+    },
+    "heavy_punch_event": {
+        "coordinates": [
+            1700.0,
+            860.0
+        ],
+        "type": "point"
+    },
+    "match_button": {
+        "coordinates": [
+            1315.0,
+            880.0
+        ],
+        "type": "point"
+    }
+}

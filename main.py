@@ -14,15 +14,15 @@ from configs import click_config as cfg, dev_config as dcfg
 
 # =========== Setup
 
-def get_img_path(file_name):
+def get_img_path(file_name) -> str:
     """Returns the path to the resource folder. Meant to be used from top level only."""
-    resource_path = Path(__file__).parent / "resources/images"
+    resource_path:Path = Path(__file__).parent / "resources/images"
     return str(resource_path/file_name)
 
-data_file_path = Path(__file__).parent / f"resources/ui_data/{dcfg.data_file_name}"
+data_file_path:Path = Path(__file__).parent / f"resources/ui_data/{dcfg.data_file_name}"
 
 with open(data_file_path, "r") as f:
-    ui_data = json.load(f)
+    ui_data:dict = json.load(f)
 
 # =========== Setup End
 

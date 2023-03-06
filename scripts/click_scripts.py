@@ -42,12 +42,12 @@ def valreturn_img(img_path:str, region:tuple[int,int,int,int], confidence:float=
 
 
 @retry(tries=10,delay=60,exceptions=NotFoundException)
-def valreturn_long(img_path:str, region:tuple[int,int,int,int], conf1:float=cfg.confidence, **kwargs):
+def valreturn_long(img_path:str, region:tuple[int,int,int,int], conf1:float=cfg.confidence, **kwargs) -> Point:
     """Retry decorator time is modified for longer duration, otherwise same as original."""
     return valreturn_img(img_path, confidence=conf1, region=region, **kwargs)
 
 
-def sleep_click(coordinates:Point|None=None, sleep_time=cfg.sleep_click_default):
+def sleep_click(coordinates:Point|None=None, sleep_time=cfg.sleep_click_default) -> None:
     """Clicks at current position if no coordinates are passed. Sleeps for specified time afterwards."""
     pa.click(coordinates) if coordinates else pa.click()
     sleep(sleep_time)

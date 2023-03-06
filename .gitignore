@@ -1,1 +1,5 @@
 *.pyc
+*.cypthon-311.pyc
+scripts/__pycache__/
+
+tests/__pycache__/

@@ -13,4 +13,4 @@ def test_retry():
         width = bot_right[0]-top_left[0]
         height = bot_right[1]-top_left[1]
         regionparam = (top_left[0], top_left[1], width, height)
-        quest_marker_coords = locate(qimg, region=regionparam)
+        quest_marker_coords = valreturn_img(qimg, region=regionparam)

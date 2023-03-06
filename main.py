@@ -1,38 +1,58 @@
-from scripts.click_scripts import locate, locate_long, sleep_click as sclick
-from time import sleep
+from pyscreeze import Point
+from scripts.click_scripts import (
+    valreturn_img,
+    valreturn_long,
+    sleep_click,
+)
 from pathlib import Path
 import json
-import os
 import logging
+
 logging.basicConfig(level=logging.WARNING)
-logger = logging.getLogger('tof_event_log')
+logger = logging.getLogger("tof_event_log")
+from configs import click_config as cfg, dev_config as dcfg
 
-os.getcwd()
+# =========== Setup
 
-data_file = Path(__file__).parent/"resources/ui_data/final_data_file.json"
-resource_path = Path(__file__).parent/"resources/images"
-with open(data_file,'r') as f:
-    json_data = json.load(f)
-
-def img_path(file_name):
+def get_img_path(file_name):
+    """Returns the path to the resource folder. Meant to be used from top level only."""
+    resource_path = Path(__file__).parent / "resources/images"
     return str(resource_path/file_name)
 
+data_file_path = Path(__file__).parent / f"resources/ui_data/{dcfg.data_file_name}"
+
+with open(data_file_path, "r") as f:
+    ui_data = json.load(f)
+
+# =========== Setup End
+
+# ============= UI Data
+gift_img_path: str = get_img_path(ui_data["gift_sword_area"]["file_name"])
+gift_img_region: tuple[int, int, int, int] = ui_data["gift_sword_area"]["region"]
+
+
+half_ani_button_coordinates: Point = ui_data["half_ani_button"]["coordinates"]
+
+ff_img_path: str = get_img_path(ui_data["frost_flame_img"]["file_name"])
+
+flame_icon_path = get_img_path(ui_data["flame_icon_area"]["file_name"])
+flame_icon_region = ui_data["flame_icon_area"]["region"]
+
+
+# ============== Ui Data End
+
+
 def main():
-    d = json_data
+
     while True:
-        gift_img_path=img_path(d['gift_sword_area']['file_name'])
-        gift_img_region=d['gift_sword_area']['region']
-        gift_coords = locate(gift_img_path, region=gift_img_region)
-        sclick(*gift_coords)
-        sclick(d['half_ani_button'])
-        ff_img_path=img_path(d['frost_flame_img']['file_name'])
-        ff_coords = locate(ff_img_path, region=d['ff_img_path']['region'])
-        sclick(ff_coords)
-        flame_icon_path = img_path(d['flame_icon_area']['file_name'])
-        flame_icon_region = d['flame_icon_path']['region']
-        flame_icon_coords = locate(flame_icon_path, region=flame_icon_region)
-        locate_long(flame_icon_coords, region=flame_icon_region)
-        locate_long(gift_img_path, region=gift_img_region)
+        # Check gift box exists on startup, then click giftbox -> half anniversary party
+        gift_coords: Point = valreturn_img(gift_img_path, region=gift_img_region)
+        sleep_click(gift_coords)
+        sleep_click(half_ani_button_coordinates)
+
+        valreturn_long(flame_icon_path, region=flame_icon_region)
+        valreturn_long(gift_img_path, region=gift_img_region)
+
 
 if __name__ == "__main__":
     main()

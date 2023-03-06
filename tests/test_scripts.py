@@ -4,7 +4,7 @@ from scripts.click_scripts import *
 from pathlib import Path
 import pyautogui as pa
 
-from scripts.click_scripts import locate, locate_long, sleep_click as sclick
+from scripts.click_scripts import valreturn_img, valreturn_long, sleep_click as sleep_click
 import json
 import os
 
@@ -28,13 +28,13 @@ def test_image_locate():
 def test_coords_value_is_point():
     # must have vs code in full screen
     path = Path(__file__).parent / "test_resources/vsicon.png"
-    coords = locate(img_path=str(path), confidence = 0.5, region=(0,0,250,250))
+    coords = valreturn_img(img_path=str(path), confidence = 0.5, region=(0,0,250,250))
     assert type(coords) is Point
 
 def test_mouse_coords_matches():
     # must have vs code in full screen
     path = Path(__file__).parent / "test_resources/vsicon.png"
-    coords = locate(str(path), confidence = 0.5, region=(0,0,250,250))
+    coords = valreturn_img(str(path), confidence = 0.5, region=(0,0,250,250))
     pa.moveTo(coords)
     mousecoords = pa.position()
     assert mousecoords == coords
@@ -42,7 +42,7 @@ def test_mouse_coords_matches():
 def test_able_to_locate_gift_box():
     # must place the image near top left of screen
     path = Path(__file__).parent / "test_resources/gift_sword_area.png"
-    coords = locate(str(path), confidence = 0.5, region=(0,0,500,500))
+    coords = valreturn_img(str(path), confidence = 0.5, region=(0,0,500,500))
     pa.moveTo(coords)
     mousecoords = pa.position()
     assert mousecoords == coords
@@ -50,7 +50,7 @@ def test_able_to_locate_gift_box():
 def test_able_to_locate_flame_icon():
     # must place the image near top left of screen
     path = Path(__file__).parent / "test_resources/flame_icon_area.png"
-    coords = locate(str(path), confidence = 0.5, region=(0,0,500,500))
+    coords = valreturn_img(str(path), confidence = 0.5, region=(0,0,500,500))
     pa.moveTo(coords)
     mousecoords = pa.position()
     assert mousecoords == coords

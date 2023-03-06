@@ -21,7 +21,7 @@ def valreturn_img(img_path:str, region:tuple[int,int,int,int], confidence:float=
     Args:
         img_path (str): Full or relative path to the image file.
         region (tuple[int,int,int,int]): Area to look for the images. First two ints are the coordinates of the top left corner of the region. Second two are the width and height.
-        confidence (float, optional): Lower is higher chance of false positive. Higher is higher chance of false positive. Defaults to cfg.confidence.
+        confidence (float, optional): Lower is higher chance of false positive. Higher is higher chance of false negative. Defaults to cfg.confidence.
 
     Raises:
         NotFoundException: When the image cannot be found anywhere. Could be that the region to search in is wrong or confidence is too high.

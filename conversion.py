@@ -19,6 +19,10 @@ def conversion():
 
 
     df = pandas.read_excel(xl_file_path)
+    df = df.fillna(0)
+    float_col = df.select_dtypes(include=['float64'])
+    for col in float_col.columns.values:
+        df[col] = df[col].astype('int64')
 
     dict_ui_data = {}
 

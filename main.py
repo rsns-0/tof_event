@@ -35,8 +35,8 @@ half_ani_button_coordinates: Point = ui_data["half_ani_button"]["coordinates"]
 
 ff_img_path: str = get_img_path(ui_data["frost_flame_img"]["file_name"])
 
-flame_icon_path = get_img_path(ui_data["flame_icon_area"]["file_name"])
-flame_icon_region = ui_data["flame_icon_area"]["region"]
+flame_icon_path:str = get_img_path(ui_data["flame_icon_area"]["file_name"])
+flame_icon_region:tuple[int,int,int,int] = ui_data["flame_icon_area"]["region"]
 
 
 # ============== Ui Data End

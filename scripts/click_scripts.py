@@ -1,6 +1,7 @@
 import pyautogui as pa
 from time import sleep
 from retry import retry
+from retry.api import retry_call
 from configs import click_config as cfg
 import logging
 logging.basicConfig(level=logging.INFO)
@@ -41,7 +42,7 @@ def valreturn_img(img_path:str, region:tuple[int,int,int,int], confidence:float=
         )
 
 
-@retry(tries=10,delay=60,exceptions=NotFoundException)
+@retry(tries=10,delay=25,exceptions=NotFoundException)
 def valreturn_long(img_path:str, region:tuple[int,int,int,int], conf1:float=cfg.confidence, **kwargs) -> Point:
     """Retry decorator time is modified for longer duration, otherwise same as original."""
     return valreturn_img(img_path, confidence=conf1, region=region, **kwargs)

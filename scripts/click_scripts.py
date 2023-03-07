@@ -42,7 +42,7 @@ def valreturn_img(img_path:str, region:tuple[int,int,int,int], confidence:float=
         )
 
 
-@retry(tries=10,delay=60,exceptions=NotFoundException)
+@retry(tries=10,delay=30,exceptions=NotFoundException)
 def valreturn_long(img_path:str, region:tuple[int,int,int,int], confidence:float=cfg.confidence, **kwargs) -> Point:
     """Retry decorator time is modified for longer duration, otherwise same as original."""
     if result := pa.locateCenterOnScreen(img_path, region=region, confidence=confidence, **kwargs):

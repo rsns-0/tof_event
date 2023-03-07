@@ -1,3 +1,7 @@
+"""
+For reference only.
+"""
+
 from dataclasses import dataclass
 import pyautogui
 

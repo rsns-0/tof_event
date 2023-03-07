@@ -42,10 +42,19 @@ def valreturn_img(img_path:str, region:tuple[int,int,int,int], confidence:float=
         )
 
 
-@retry(tries=10,delay=25,exceptions=NotFoundException)
-def valreturn_long(img_path:str, region:tuple[int,int,int,int], conf1:float=cfg.confidence, **kwargs) -> Point:
+@retry(tries=10,delay=60,exceptions=NotFoundException)
+def valreturn_long(img_path:str, region:tuple[int,int,int,int], confidence:float=cfg.confidence, **kwargs) -> Point:
     """Retry decorator time is modified for longer duration, otherwise same as original."""
-    return valreturn_img(img_path, confidence=conf1, region=region, **kwargs)
+    if result := pa.locateCenterOnScreen(img_path, region=region, confidence=confidence, **kwargs):
+        return result
+    raise NotFoundException(
+        f"""
+        Tried searching for {img_path} and it was not found at this time.
+        It may not be in the specified region of {region}.
+        Or, the confidence parameter is too high ({confidence})
+        Check if the game window is open and unobstructed.
+        """
+        )
 
 
 def sleep_click(coordinates:Point|None=None, sleep_time=cfg.sleep_click_default) -> None:
